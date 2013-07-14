@@ -59,8 +59,8 @@ project plus the file __package.box__ to a local folder (__/example/__):
 Open a shell. Set the working directory to
 this folder, and run the command __vagrant up__:
 
-    cd /example/
-    vagrant up
+    host$ cd /example/
+    host$ vagrant up
 
 With this command, Vagrant will try to setup a new virtual machine,
 based upon the files of this project. After the virtual machine has been
@@ -75,22 +75,23 @@ your own desktop, you will need VirtualBox as well. The machine is
 designed to run with 128Mb, which allows you to run multiple virtual
 machines at the same time. Networking is configured for DHCP.
 
-Suggested procedure for Joomla! bug-squashing
-=============================================
+Suggested procedure 
+===================
 One computer (laptop, desktop) is used as host for various VirtualBox guest-VMs.
 Each guest-VM is capable of running one or more Joomla! sites. Note that each 
 guest-VM is configured with 128MB RAM. Running up to 8 Joomla! sites should be workable.
 
-To prepare for the session, go to the __remote__ folder and checkout the GitHub sources: 
+To prepare for the session, go to the __remote__ folder. Checkout the GitHub sources to that folder: 
 
-    git clone git://github.com/joomla/joomla-cms.git
+    host$ cd remote/
+    host$ git clone git://github.com/joomla/joomla-cms.git
 
 Move this folder to a new folder like this, and create duplicates:
 
-    mv joomla-cms joomla1
-    cp -R joomla1 joomla2
-    cp -R joomla1 joomla3
-    cp -R joomla1 joomla4
+    host$ mv remote/joomla-cms remote/joomla1
+    host$ cp -R remote/joomla1 remote/joomla2
+    host$ cp -R remote/joomla1 remote/joomla3
+    host$ cp -R remote/joomla1 remote/joomla4
 
 Assign each folder to a specific user. See the FAQ below on how these folders 
 are used to actually install Joomla!. Each user is able to either simply install
@@ -98,11 +99,12 @@ Joomla! and start testing. After testing has been completed (for instance, once 
 specific bug has been confirmed, or a fix has been tested), an advanced user (or
 the Vagrant admin) can login through SSH, and reset all local changes:
 
-    git reset --hard HEAD
+    guest$ cd /var/www/html
+    guest$ git reset --hard HEAD
 
 Optionally, new commits can be fetched:
 
-    git pull
+    guest$ git pull
 
 Hint: You can also include other files in the __remote__ folder, for instance the 
 official Joomla! stable-package, or additional extensions.
@@ -172,16 +174,16 @@ Basic commands
 --------------
 You can use the following command to create a new VM:
 
-    vagrant up
+    host$ vagrant up
 
 To administer the VM itself, either SSH to the VM directly, or use the
 __vagrant__ command:
 
-    vagrant ssh
+    host$ vagrant ssh
 
-To remote the VM again:
+To remove the VM again:
 
-    vagrant destroy
+    host$ vagrant destroy
 
 Hints for creating your own box
 -------------------------------
@@ -194,11 +196,11 @@ Vagrant.
 When using CentOS, make sure to clean up the VM before offering the
 VMDK-file to the public:
 
-    yum clean all
+    guest$ yum clean all
 
 When you're done with setting up the VM, shut it down. Make sure
 VirtualBox as a program is still running, and run this from your host:
 
-    vagrant package --base joomla-cms
+    host$ vagrant package --base joomla-cms
 
 This will turn your VM into an actual Vagrant package.
