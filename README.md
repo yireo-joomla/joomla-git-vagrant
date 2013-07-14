@@ -45,10 +45,12 @@ first. If you are new to VirtualBox, make sure to setup a simple virtual
 machine first, using Linux of some kind.
 
 Download the file __package.box__ from this URL (480Mb).
+
     https://s3-eu-west-1.amazonaws.com/yireo-vagrant/package.box
 
 Once Vagrant and VirtualBox are installed, copy the files of this
 project plus the file __package.box__ to a local folder (__/example/__):
+
     /example/package.box
     /example/README.md
     /example/remote/
@@ -80,9 +82,11 @@ Each guest-VM is capable of running one or more Joomla! sites. Note that each
 guest-VM is configured with 128MB RAM. Running up to 8 Joomla! sites should be workable.
 
 To prepare for the session, go to the __remote__ folder and checkout the GitHub sources: 
+
     git clone git://github.com/joomla/joomla-cms.git
 
 Move this folder to a new folder like this, and create duplicates:
+
     mv joomla-cms joomla1
     cp -R joomla1 joomla2
     cp -R joomla1 joomla3
@@ -93,9 +97,11 @@ are used to actually install Joomla!. Each user is able to either simply install
 Joomla! and start testing. After testing has been completed (for instance, once a 
 specific bug has been confirmed, or a fix has been tested), an advanced user (or
 the Vagrant admin) can login through SSH, and reset all local changes:
+
     git reset --hard HEAD
 
 Optionally, new commits can be fetched:
+
     git pull
 
 Hint: You can also include other files in the __remote__ folder, for instance the 
@@ -165,13 +171,16 @@ Vagrant administration
 Basic commands
 --------------
 You can use the following command to create a new VM:
+
     vagrant up
 
 To administer the VM itself, either SSH to the VM directly, or use the
 __vagrant__ command:
+
     vagrant ssh
 
 To remote the VM again:
+
     vagrant destroy
 
 Hints for creating your own box
@@ -184,10 +193,12 @@ Vagrant.
 
 When using CentOS, make sure to clean up the VM before offering the
 VMDK-file to the public:
+
     yum clean all
 
 When you're done with setting up the VM, shut it down. Make sure
 VirtualBox as a program is still running, and run this from your host:
+
     vagrant package --base joomla-cms
 
 This will turn your VM into an actual Vagrant package.
